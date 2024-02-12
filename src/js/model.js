@@ -34,13 +34,9 @@ export const loadRecipe = async function (id) {
     const data = await AJAX(`${API_URL}${id}?key=${KEY}`);
     state.recipe = createRecipeObject(data);
 
-    console.log(data);
-
     if (state.bookmarks.some(bookmark => bookmark.id === id))
       state.recipe.bookmarked = true;
     else state.recipe.bookmarked = false;
-
-    console.log(state.recipe);
   } catch (err) {
     console.error(`${err} ⚠️⚠️⚠️⚠️`);
     throw err;
@@ -116,7 +112,6 @@ export const deleteBookmark = function (id) {
 const init = function () {
   const storage = localStorage.getItem('bookmarks');
   if (storage) state.bookmarks = JSON.parse(storage);
-  console.log(state.bookmarks);
 };
 init();
 
